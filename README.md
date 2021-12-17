@@ -463,7 +463,7 @@ In order to get a single resource we can use route params. In this case we can g
 
 ```js
 // src/routes/user-routes.js
-UserRouter.get("/:userId", userController.getUserDetails);
+UserRouter.get("/:id", userController.getUserDetails);
 ```
 
 Then, we can define the controller that fetches the info of the user with the id that we pass.
@@ -471,11 +471,11 @@ Then, we can define the controller that fetches the info of the user with the id
 ```js
 // src/routes/user-controller.js
 async function getUserDetails(req, res, next) {
-  const { userId } = req.params;
+  const { id } = req.params;
 
   try {
     const user = await db.User.findOne({
-      _id: userId,
+      _id: id,
     })
       .select("-password -__v -createdAt -updatedAt")
       .lean()
@@ -586,13 +586,13 @@ UserRouter.post("/", userController.createUser);
 ```js
 // src/routes/user-controller.js
 async function updateUser(req, res, next) {
-  const { userId } = req.params;
+  const { id } = req.params;
   const { firstName, lastName } = req.body;
 
   try {
     const updatedUser = await db.User.findOneAndUpdate(
       {
-        _id: userId,
+        _id: id,
       },
       {
         $set: {
@@ -644,17 +644,17 @@ In order to delete a resource we can follow the same logic, we need to define an
 
 ```js
 // src/routes/user-routes.js
-UserRouter.delete("/:userId", userController.deleteUser);
+UserRouter.delete("/:id", userController.deleteUser);
 ```
 
 ```js
 // src/routes/user-controller.js
 async function deleteUser(req, res, next) {
-  const { userId } = req.params;
+  const { id } = req.params;
 
   try {
     const result = await db.User.deleteOne({
-      _id: userId,
+      _id: id,
     }).lean();
 
     if (result.ok === 1 && result.deletedCount === 1) {
@@ -672,7 +672,7 @@ async function deleteUser(req, res, next) {
 }
 ```
 
-Then, if we make a request to the endpoint with the `DELETE` verb, we should get a response if the `userId` exists in the database.
+Then, if we make a request to the endpoint with the `DELETE` verb, we should get a response if the `id` exists in the database.
 
 ## CRUD API Exercises
 

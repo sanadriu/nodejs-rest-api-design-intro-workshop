@@ -31,22 +31,25 @@ const UserSchema = new mongoose.Schema(
     },
     speaks: [
       {
-        type: String,
-        enum: [
-          "english",
-          "spanish",
-          "catalan",
-          "german",
-          "italian",
-          "javascript",
-        ],
+        type: [String],
+        enum: {
+          values: [
+            "english",
+            "spanish",
+            "catalan",
+            "german",
+            "italian",
+            "javascript",
+          ],
+          message: (props) => `The ${props.value} speak is not valid`,
+        },
       },
     ],
   },
   { timestamps: true },
 );
 
-UserSchema.pre("save", async function passwordPreSave(next) {
+UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     return next();
   }
@@ -54,6 +57,15 @@ UserSchema.pre("save", async function passwordPreSave(next) {
   try {
     const hash = await bcrypt.hash(this.password, 12);
     this.password = hash;
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
+
+UserSchema.pre("save", async function (next) {
+  try {
+    this.speaks = [...new Set(this.speaks)];
     return next();
   } catch (error) {
     return next(error);
