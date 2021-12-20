@@ -1,8 +1,8 @@
-const { Editorial } = require("../models");
+const { EditorialModel } = require("../models");
 
 async function getEditorials(req, res, next) {
   try {
-    const editorials = await Editorial.find({})
+    const editorials = await EditorialModel.find({})
       .select("-createdAt -updatedAt -__v")
       .lean()
       .exec();
@@ -20,11 +20,10 @@ async function getSingleEditorial(req, res, next) {
   try {
     const { id: _id } = req.params;
 
-    const editorial = await Editorial.find({ _id })
-      .select("-createdAt -updatedAt -__v")
+    const editorial = await EditorialModel.find({ _id })
       .populate({ path: "authors", select: "firstName lastName" })
-      .populate("publishedBooks")
-      .lean()
+      .populate({ path: "publishedBooks", select: "title" })
+      .select("-createdAt -updatedAt -__v")
       .exec();
 
     res.status(200).send({
@@ -40,7 +39,7 @@ async function createEditorial(req, res, next) {
   try {
     const { name, dateOfCreation, publishedBooks, authors } = req.body;
 
-    const editorial = await Editorial.create({
+    const editorial = await EditorialModel.create({
       name,
       dateOfCreation,
       publishedBooks,
@@ -61,7 +60,7 @@ async function updateEditorial(req, res, next) {
     const { id: _id } = req.params;
     const { name, dateOfCreation, publishedBooks, authors } = req.body;
 
-    const editorial = await Editorial.findOneAndUpdate(
+    const editorial = await EditorialModel.findOneAndUpdate(
       { _id },
       {
         name,
@@ -85,7 +84,7 @@ async function deleteEditorial(req, res, next) {
   try {
     const { id: _id } = req.params;
 
-    const editorial = await Editorial.findOneAndDelete({ _id });
+    const editorial = await EditorialModel.findOneAndDelete({ _id });
 
     res.status(200).send({
       success: true,

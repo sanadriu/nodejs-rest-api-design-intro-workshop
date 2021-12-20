@@ -1,8 +1,8 @@
-const { Book } = require("../models");
+const { BookModel } = require("../models");
 
 async function getBooks(req, res, next) {
   try {
-    const books = await Book.find({})
+    const books = await BookModel.find({})
       .select("-createdAt -updatedAt -__v")
       .lean()
       .exec();
@@ -20,7 +20,7 @@ async function getSingleBook(req, res, next) {
   try {
     const { id: _id } = req.params;
 
-    const book = await Book.findOne({ _id })
+    const book = await BookModel.findOne({ _id })
       .select("-createdAt -updatedAt -__v")
       .populate({
         path: "author",
@@ -42,7 +42,7 @@ async function createBook(req, res, next) {
   try {
     const { title, author, genre, year, pages } = req.body;
 
-    const book = await Book.create({
+    const book = await BookModel.create({
       title,
       author,
       genre,
@@ -64,7 +64,7 @@ async function updateBook(req, res, next) {
     const { id: _id } = req.params;
     const { title, pages } = req.body;
 
-    const book = await Book.findOneAndUpdate(
+    const book = await BookModel.findOneAndUpdate(
       { _id },
       { title, pages },
       { new: true, runValidator: true },
@@ -83,7 +83,7 @@ async function deleteBook(req, res, next) {
   try {
     const { id: _id } = req.params;
 
-    const book = await Book.findOneAndDelete({ _id });
+    const book = await BookModel.findOneAndDelete({ _id });
 
     res.status(200).send({
       success: true,

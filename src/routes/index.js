@@ -3,7 +3,7 @@ const BookRouter = require("./book-routes");
 const EditorialRouter = require("./editorial-routes");
 
 module.exports = {
-  User: UserRouter,
-  Book: BookRouter,
-  Editorial: EditorialRouter,
+  UserRouter,
+  BookRouter,
+  EditorialRouter,
 };

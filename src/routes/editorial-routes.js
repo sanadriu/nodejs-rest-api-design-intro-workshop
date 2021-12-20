@@ -1,12 +1,15 @@
 const { Router } = require("express");
-const { Editorial } = require("../controllers");
+const { EditorialController } = require("../controllers");
+const { authMiddleware } = require("../middleware");
 
 const EditorialRouter = Router();
 
-EditorialRouter.get("/", Editorial.getEditorials);
-EditorialRouter.get("/:id", Editorial.getSingleEditorial);
-EditorialRouter.post("/", Editorial.createEditorial);
-EditorialRouter.put("/:id", Editorial.updateEditorial);
-EditorialRouter.delete("/:id", Editorial.deleteEditorial);
+EditorialRouter.use(authMiddleware);
+
+EditorialRouter.get("/", EditorialController.getEditorials);
+EditorialRouter.get("/:id", EditorialController.getSingleEditorial);
+EditorialRouter.post("/", EditorialController.createEditorial);
+EditorialRouter.put("/:id", EditorialController.updateEditorial);
+EditorialRouter.delete("/:id", EditorialController.deleteEditorial);
 
 module.exports = EditorialRouter;

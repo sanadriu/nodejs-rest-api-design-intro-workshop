@@ -1,12 +1,14 @@
 const config = require("./config/config");
+
 const express = require("express");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-const { json } = require("body-parser");
-const errorMiddleware = require("./middleware/error-middleware");
+const json = require("body-parser").json;
 
-const { Book, User, Editorial } = require("./routes");
+const { authMiddleware, errorMiddleware } = require("./middleware");
+const { UserController } = require("./controllers");
+const { BookRouter, UserRouter, EditorialRouter } = require("./routes");
 
 const app = express();
 
@@ -19,9 +21,11 @@ app.use(
   }),
 );
 
-app.use("/books", Book);
-app.use("/users", User);
-app.use("/editorials", Editorial);
+app.use("/books", BookRouter);
+app.use("/users", UserRouter);
+app.use("/editorials", EditorialRouter);
+
+app.post("/sign-up", authMiddleware, UserController.signUp);
 
 app.use(errorMiddleware);
 

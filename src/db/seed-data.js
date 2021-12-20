@@ -1,46 +1,14 @@
+const mongoose = require("mongoose");
+
 function getSeedUsers() {
   return [
     {
-      firstName: "Jordan",
-      lastName: "Peterson",
-      email: "woga@wi.lu",
-      password: "jordan-super-password",
-      speaks: ["english", "javascript"],
-    },
-    {
-      firstName: "Margaret",
-      lastName: "Watkins",
-      email: "edde@kodbi.eh",
-      password: "margaret-super-password",
-      speaks: ["catalan", "spanish"],
-    },
-    {
-      firstName: "Mable",
-      lastName: "Schneider",
-      email: "ba@wuf.ws",
-      password: "mable-super-password",
-      speaks: ["german", "english"],
-    },
-    {
-      firstName: "Alta",
-      lastName: "Harris",
-      email: "cuk@boeli.gn",
-      password: "alta-super-password",
-      speaks: ["english", "spanish"],
-    },
-    {
-      firstName: "Darrell",
-      lastName: "Wilkerson",
-      email: "ecdescu@riwluzhok.pf",
-      password: "darrell-super-password",
-      speaks: ["english", "javascript"],
-    },
-    {
-      firstName: "Ryan",
-      lastName: "McGuire",
-      email: "beta@houboem.py",
-      password: "ryan-super-password",
-      speaks: ["english", "spanish"],
+      _id: new mongoose.Types.ObjectId("000000000000000000001001"),
+      uid: "2IKNm1i6yYdqKGvQTKHOrZVmnin2",
+      firstName: "Adrian",
+      lastName: "Sánchez",
+      email: "skualed@gmail.com",
+      speaks: ["spanish", "english", "javascript"],
     },
   ];
 }
@@ -48,6 +16,7 @@ function getSeedUsers() {
 function getSeedBooks() {
   return [
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002001"),
       title: "Incubus Sky",
       author: null,
       genre: "Fantasy",
@@ -55,6 +24,7 @@ function getSeedBooks() {
       pages: 220,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002002"),
       title: "The Twilight Wanderer",
       author: null,
       genre: "Fantasy",
@@ -62,6 +32,7 @@ function getSeedBooks() {
       pages: 300,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002003"),
       title: "City of Monday",
       author: null,
       genre: "Crime",
@@ -69,6 +40,7 @@ function getSeedBooks() {
       pages: 250,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002004"),
       title: "The Saturday's Shaman",
       author: null,
       genre: "Romance",
@@ -76,6 +48,7 @@ function getSeedBooks() {
       pages: 280,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002005"),
       title: "The Underground of the Bane",
       author: null,
       genre: "Thriller",
@@ -83,6 +56,7 @@ function getSeedBooks() {
       pages: 20,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002006"),
       title: "God in the Roadtrip",
       author: null,
       genre: "Fantasy",
@@ -90,6 +64,7 @@ function getSeedBooks() {
       pages: 320,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002007"),
       title: "Sunken Haven",
       author: null,
       genre: "Comedy",
@@ -97,6 +72,7 @@ function getSeedBooks() {
       pages: 240,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002008"),
       title: "The Harrowing Temper",
       author: null,
       genre: "Crime",
@@ -104,6 +80,7 @@ function getSeedBooks() {
       pages: 120,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002009"),
       title: "Sleep of Hallows",
       author: null,
       genre: "Fantasy",
@@ -111,6 +88,7 @@ function getSeedBooks() {
       pages: 220,
     },
     {
+      _id: new mongoose.Types.ObjectId("000000000000000000002010"),
       title: "The Cavern's Fire",
       author: null,
       genre: "Crime",
