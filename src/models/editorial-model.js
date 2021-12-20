@@ -14,13 +14,13 @@ const EditorialSchema = new mongoose.Schema(
     },
     publishedBooks: [
       {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.SchemaTypes.ObjectId,
         ref: "book",
       },
     ],
     authors: [
       {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.SchemaTypes.ObjectId,
         ref: "user",
       },
     ],

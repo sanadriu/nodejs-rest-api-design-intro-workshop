@@ -3,7 +3,7 @@ const { Book } = require("../models");
 async function getBooks(req, res, next) {
   try {
     const books = await Book.find({})
-      .select({ _id: 1, title: 1 })
+      .select("-createdAt -updatedAt -__v")
       .lean()
       .exec();
 
@@ -21,7 +21,7 @@ async function getSingleBook(req, res, next) {
     const { id: _id } = req.params;
 
     const book = await Book.findOne({ _id })
-      .select({ __v: 0 })
+      .select("-createdAt -updatedAt -__v")
       .populate({
         path: "author",
         select: { _id: 1, firstName: 1, lastName: 1 },
